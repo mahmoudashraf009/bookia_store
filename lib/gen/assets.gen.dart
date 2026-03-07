@@ -14,6 +14,31 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/welcome_screen_english.jpeg
+  AssetGenImage get welcome_screen_english => const AssetGenImage(
+    'assets/images/welcome_screen_english.jpeg',
+  );
+
+  /// File path: assets/images/login_screen.jpeg
+  AssetGenImage get login_screen => const AssetGenImage(
+    'assets/images/login_screen.jpeg',
+  );
+
+  /// File path: assets/images/register_screen.jpeg
+  AssetGenImage get register_screen => const AssetGenImage(
+    'assets/images/register_screen.jpeg',
+  );
+
+  /// File path: assets/images/welcome_screen_arabic.jpeg
+  AssetGenImage get welcome_screen_arabic => const AssetGenImage(
+    'assets/images/welcome_screen_arabic.jpeg',
+  );
+
+  /// File path: assets/images/first_screen.jpeg
+  AssetGenImage get first_screen => const AssetGenImage(
+    'assets/images/first_screen.jpeg',
+  );
+
   /// File path: assets/images/cib_apple.png
   AssetGenImage get cibApple =>
       const AssetGenImage('assets/images/cib_apple.png');
@@ -35,6 +60,11 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    welcome_screen_english,
+    login_screen,
+    register_screen,
+    welcome_screen_arabic,
+    first_screen,
     cibApple,
     googleIc,
     splash,
