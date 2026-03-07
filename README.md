@@ -9,6 +9,7 @@ The app focuses on providing a simple and clean user experience with support for
 - Clean and modern UI
 - User authentication (Login & Register)
 - Multi-language support (English & Arabic)
+- Localized authentication screens (Welcome, Login, and Register)
 - Responsive layout
 
 ---
@@ -17,6 +18,7 @@ The app focuses on providing a simple and clean user experience with support for
 
 ### Splash Screen
 ![Splash Screen](assets/images/first_screen.jpeg)
+
 This is the splash screen that appears when the application starts.  
 It displays the **Bookia logo** while the app loads before navigating to the main screen.
 
@@ -24,6 +26,7 @@ It displays the **Bookia logo** while the app loads before navigating to the mai
 
 ### Welcome Screen (Arabic)
 ![Welcome Screen Arabic](assets/images/welcome_screen_arabic.jpeg)
+
 This screen is the Arabic version of the welcome page.  
 It allows users to choose between **logging in** or **creating a new account**, demonstrating the app's **Arabic localization support**.
 
@@ -31,6 +34,7 @@ It allows users to choose between **logging in** or **creating a new account**, 
 
 ### Welcome Screen (English)
 ![Welcome Screen](assets/images/welcome_screen_english.jpeg)
+
 This is the English version of the welcome screen.  
 Users can select **Login** or **Register**, and it also includes a **language switch icon** to change the app language.
 
@@ -40,14 +44,16 @@ Users can select **Login** or **Register**, and it also includes a **language sw
 ![Login Screen](assets/images/login_screen.jpeg)
 
 The login screen allows users to sign in using their **email and password**.  
-It also supports **Google sign-in and Apple sign-in**, and provides an option to reset the password if forgotten.
+It also supports **Google sign-in and Apple sign-in**, and provides an option to reset the password if forgotten.  
+This screen is also **fully localized**, supporting both **English and Arabic languages**.
 
 ---
 
 ### Register Screen
 ![Register Screen](assets/images/register_screen.jpeg)
 
-The registration screen allows new users to create an account by entering their **username, email, password, and password confirmation**.
+The registration screen allows new users to create an account by entering their **username, email, password, and password confirmation**.  
+This screen is also **translated and localized for both English and Arabic users**.
 
 ---
 

@@ -14,38 +14,33 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/welcome_screen_english.jpeg
-  AssetGenImage get welcome_screen_english => const AssetGenImage(
-    'assets/images/welcome_screen_english.jpeg',
-  );
-
-  /// File path: assets/images/login_screen.jpeg
-  AssetGenImage get login_screen => const AssetGenImage(
-    'assets/images/login_screen.jpeg',
-  );
-
-  /// File path: assets/images/register_screen.jpeg
-  AssetGenImage get register_screen => const AssetGenImage(
-    'assets/images/register_screen.jpeg',
-  );
-
-  /// File path: assets/images/welcome_screen_arabic.jpeg
-  AssetGenImage get welcome_screen_arabic => const AssetGenImage(
-    'assets/images/welcome_screen_arabic.jpeg',
-  );
-
-  /// File path: assets/images/first_screen.jpeg
-  AssetGenImage get first_screen => const AssetGenImage(
-    'assets/images/first_screen.jpeg',
-  );
-
   /// File path: assets/images/cib_apple.png
   AssetGenImage get cibApple =>
       const AssetGenImage('assets/images/cib_apple.png');
 
+  /// File path: assets/images/first_screen.jpeg
+  AssetGenImage get firstScreen =>
+      const AssetGenImage('assets/images/first_screen.jpeg');
+
   /// File path: assets/images/google_ic.png
   AssetGenImage get googleIc =>
       const AssetGenImage('assets/images/google_ic.png');
+
+  /// File path: assets/images/login_screen.jpeg
+  AssetGenImage get loginScreen =>
+      const AssetGenImage('assets/images/login_screen.jpeg');
+
+  /// File path: assets/images/login_screen_arabic .jpeg
+  AssetGenImage get loginScreenArabic =>
+      const AssetGenImage('assets/images/login_screen_arabic .jpeg');
+
+  /// File path: assets/images/register_screen.jpeg
+  AssetGenImage get registerScreen =>
+      const AssetGenImage('assets/images/register_screen.jpeg');
+
+  /// File path: assets/images/register_screen_arabic.jpeg
+  AssetGenImage get registerScreenArabic =>
+      const AssetGenImage('assets/images/register_screen_arabic.jpeg');
 
   /// File path: assets/images/splash.png
   AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
@@ -58,18 +53,28 @@ class $AssetsImagesGen {
   AssetGenImage get welcomeBackground =>
       const AssetGenImage('assets/images/welcome_background.jpg');
 
+  /// File path: assets/images/welcome_screen_arabic.jpeg
+  AssetGenImage get welcomeScreenArabic =>
+      const AssetGenImage('assets/images/welcome_screen_arabic.jpeg');
+
+  /// File path: assets/images/welcome_screen_english.jpeg
+  AssetGenImage get welcomeScreenEnglish =>
+      const AssetGenImage('assets/images/welcome_screen_english.jpeg');
+
   /// List of all assets
   List<AssetGenImage> get values => [
-    welcome_screen_english,
-    login_screen,
-    register_screen,
-    welcome_screen_arabic,
-    first_screen,
     cibApple,
+    firstScreen,
     googleIc,
+    loginScreen,
+    loginScreenArabic,
+    registerScreen,
+    registerScreenArabic,
     splash,
     splashAndroid12,
     welcomeBackground,
+    welcomeScreenArabic,
+    welcomeScreenEnglish,
   ];
 }
 
