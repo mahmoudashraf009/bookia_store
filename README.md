@@ -40,20 +40,32 @@ Users can select **Login** or **Register**, and it also includes a **language sw
 
 ---
 
-### Login Screen
-![Login Screen](assets/images/login_screen.jpeg)
+### Login Screen (English)
+![Login Screen English](assets/images/login_screen.jpeg)
 
 The login screen allows users to sign in using their **email and password**.  
-It also supports **Google sign-in and Apple sign-in**, and provides an option to reset the password if forgotten.  
-This screen is also **fully localized**, supporting both **English and Arabic languages**.
+It also supports **Google sign-in and Apple sign-in**, and provides an option to reset the password if forgotten.
 
 ---
 
-### Register Screen
-![Register Screen](assets/images/register_screen.jpeg)
+### Login Screen (Arabic)
+![login_screen_arabic .jpeg](assets/images/login_screen_arabic%20.jpeg))
 
-The registration screen allows new users to create an account by entering their **username, email, password, and password confirmation**.  
-This screen is also **translated and localized for both English and Arabic users**.
+This is the Arabic localized version of the login screen, providing the same authentication functionality for Arabic-speaking users.
+
+---
+
+### Register Screen (English)
+![Register Screen English](assets/images/register_screen.jpeg)
+
+The registration screen allows new users to create an account by entering their **username, email, password, and password confirmation**.
+
+---
+
+### Register Screen (Arabic)
+![Register Screen Arabic](assets/images/register_screen_arabic.jpeg)
+
+This is the Arabic localized version of the registration screen, allowing users to create an account with full Arabic interface support.
 
 ---
 
