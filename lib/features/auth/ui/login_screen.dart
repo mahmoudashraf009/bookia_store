@@ -3,10 +3,11 @@ import 'package:bookia_store/core/widgets/app_button.dart';
 import 'package:bookia_store/core/widgets/app_text_field.dart';
 import 'package:bookia_store/features/auth/ui/register_screen.dart';
 import 'package:bookia_store/gen/assets.gen.dart';
-import 'package:bookia_store/gen/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../generated/locale_keys.g.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

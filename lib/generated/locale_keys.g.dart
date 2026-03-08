@@ -22,5 +22,14 @@ abstract class  LocaleKeys {
   static const confirmPassword = 'confirmPassword';
   static const alreadyAccount = 'alreadyAccount';
   static const loginNow = 'loginNow';
+  static const bestSeller = 'bestSeller';
+  static const buy = 'buy';
+  static const addToCart = 'addToCart';
+  static const price = 'price';
+  static const search = 'search';
+  static const home = 'home';
+  static const bookDetails = 'bookDetails';
+  static const description = 'description';
+  static const cart = 'cart';
 
 }

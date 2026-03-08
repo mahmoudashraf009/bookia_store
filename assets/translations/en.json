@@ -1,8 +1,6 @@
 {
-
-
-  "login": "login",
-"orderNow": "Order Your Book Now!",
+  "login": "Login",
+  "orderNow": "Order Your Book Now!",
   "Register": "Register",
   "welcomeBack": "Welcome back! Glad to see you, Again!",
   "enterEmail": "Enter your email",
@@ -19,6 +17,11 @@
   "password": "Password",
   "confirmPassword": "Confirm password",
   "alreadyAccount": "Already have an account?",
-  "loginNow": "Login Now"
+  "loginNow": "Login Now",
 
+  "bestSeller": "Best Seller",
+  "buy": "Buy",
+  "addToCart": "Add To Cart",
+  "price": "Price",
+  "search": "Search"
 }
