@@ -27,5 +27,15 @@
  "home": "الرئيسية",
  "bookDetails": "تفاصيل الكتاب",
  "description": "الوصف",
- "cart": "السلة"
+ "cart": "السلة",
+
+ "forgotPasswordTitle": "نسيت كلمة المرور؟",
+ "forgotPasswordSubtitle": "لا تقلق! يحدث هذا. من فضلك أدخل البريد الإلكتروني المرتبط بحسابك.",
+ "sendCode": "إرسال الكود",
+ "rememberPassword": "تتذكر كلمة المرور؟",
+ "otpTitle": "التحقق من الكود",
+ "otpSubtitle": "أدخل كود التحقق الذي أرسلناه على بريدك الإلكتروني.",
+ "verify": "تحقق",
+ "didNotReceiveCode": "لم تستلم الكود؟",
+ "resend": "إعادة الإرسال"
 }

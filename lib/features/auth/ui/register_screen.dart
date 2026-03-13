@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/routing/navigator.dart';
+import '../../../core/routing/routes.dart';
 import '../../../generated/locale_keys.g.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -80,6 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SizedBox(height: 15.h),
 
             AppTextField(
+              keyboardType: TextInputType.emailAddress,
               controller: emailController,
               hintText: LocaleKeys.email.tr(),
             ),
@@ -133,15 +136,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 Text(
                   LocaleKeys.alreadyAccount.tr(),
-                  style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: AppColors.darkColor),
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ),
-                  ),
+                  onTap: () {
+                    AppNavigator.pushNamed(Routes.login);
+                  },
                   child: Text(
                     LocaleKeys.loginNow.tr(),
                     style: TextStyle(

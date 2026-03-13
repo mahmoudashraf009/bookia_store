@@ -23,5 +23,15 @@
   "buy": "Buy",
   "addToCart": "Add To Cart",
   "price": "Price",
-  "search": "Search"
+  "search": "Search",
+
+  "forgotPasswordTitle": "Forgot Password?",
+  "forgotPasswordSubtitle": "Don't worry! It occurs. Please enter the email address linked with your account.",
+  "sendCode": "Send Code",
+  "rememberPassword": "Remember Password?",
+  "otpTitle": "OTP Verification",
+  "otpSubtitle": "Enter the verification code we just sent on your email address.",
+  "verify": "Verify",
+  "didNotReceiveCode": "didNot Receive Code?",
+  "resend": "Resend"
 }

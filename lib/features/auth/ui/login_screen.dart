@@ -7,6 +7,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/routing/navigator.dart';
+import '../../../core/routing/routes.dart';
 import '../../../generated/locale_keys.g.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -39,12 +41,15 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: AppColors.boldColor,
               ),
             ),
             SizedBox(height: 30.h),
+
             AppTextField(hintText: LocaleKeys.enterEmail.tr()),
+
             SizedBox(height: 15.h),
+
             AppTextField(
               hintText: LocaleKeys.enterPassword.tr(),
               obscureText: obscurePassword,
@@ -61,12 +66,15 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 8.h),
             Align(
               alignment: Alignment.centerRight,
-              child: Text(
-                LocaleKeys.forgotPassword.tr(),
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
+              child: GestureDetector(
+                onTap: () => AppNavigator.pushNamed(Routes.forgotPassword),
+                child: Text(
+                  LocaleKeys.forgotPassword.tr(),
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                    color: AppColors.boldColor,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
@@ -123,11 +131,12 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Text(
                   LocaleKeys.noAccount.tr(),
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: AppColors.darkColor),
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => RegisterScreen())),
+                  onTap: (){
+                    AppNavigator.pushNamed(Routes.register);
+                  },
                   child: Text(
                     LocaleKeys.registerNow.tr(),
                     style: TextStyle(

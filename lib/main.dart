@@ -34,3 +34,5 @@ void main() async {
 
 
 //flutter pub run easy_localization:generate -S assets/translations -O lib/gen/translations -o locale_keys.g.dart -f keys
+// flutter pub run easy_localization:generate -S assets/translations -O lib/gen/translations -o locale_keys.g.dart -f keys
+// dart run build_runner build --delete-conflicting-outputs
