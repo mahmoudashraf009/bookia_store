@@ -69,12 +69,15 @@ This is the Arabic localized version of the registration screen, allowing users 
 
 ---
 🔐 Forgot Password Screen
+
 ![Forget Password Screen](assets/images/forgot_password_screen.jpeg)
 ![Forget Password Screen_arabic](assets/images/forgot_password_screen_arabic.jpeg)
 
 
+
 This screen allows users to recover access to their accounts if they forget their password.
 Users need to enter the email address associated with their account, and the system will send a verification code to their email to continue the password reset process
+
 
 ---
 🔢 OTP Verification Screen
@@ -87,9 +90,6 @@ Users need to enter the email address associated with their account, and the sys
 After requesting a password reset, users are directed to the OTP verification screen.
 Here they enter the 6-digit verification code sent to their email.
 Once verified, the user can proceed to reset their password securely
-
-
-
 
 
 ---
