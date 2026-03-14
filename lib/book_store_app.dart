@@ -1,3 +1,4 @@
+import 'package:bookia_store/features/auth/ui/forgot_password_screen.dart';
 import 'package:bookia_store/features/auth/ui/otp_screen.dart';
 import 'package:bookia_store/features/home/ui/home_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -27,7 +28,7 @@ class BookStoreApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: "DM",
           ),
-          home:  WelcomeScreen(),
+          home:  OtpScreen(),
         );
       },
     );
