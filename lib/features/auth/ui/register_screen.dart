@@ -1,9 +1,7 @@
 import 'package:bookia_store/core/theme/app_colors.dart';
 import 'package:bookia_store/core/widgets/app_button.dart';
 import 'package:bookia_store/core/widgets/app_text_field.dart';
-import 'package:bookia_store/features/auth/ui/login_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -28,17 +26,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool obscureConfirmPassword = true;
 
   Future<void> registerUser() async {
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
+
+    if(passwordController.text != confirmPasswordController.text){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Passwords do not match")),
       );
-
-      print("User registered successfully");
-
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
+      return;
     }
+
+    print("User registered successfully");
+
+    AppNavigator.pushReplacementNamed(Routes.login);
   }
 
   @override

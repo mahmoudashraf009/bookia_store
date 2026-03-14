@@ -22,6 +22,10 @@ class $AssetsImagesGen {
   AssetGenImage get firstScreen =>
       const AssetGenImage('assets/images/first_screen.jpeg');
 
+  /// File path: assets/images/forgot_password_screen.jpeg
+  AssetGenImage get forgotPasswordScreen =>
+      const AssetGenImage('assets/images/forgot_password_screen.jpeg');
+
   /// File path: assets/images/google_ic.png
   AssetGenImage get googleIc =>
       const AssetGenImage('assets/images/google_ic.png');
@@ -30,9 +34,13 @@ class $AssetsImagesGen {
   AssetGenImage get loginScreen =>
       const AssetGenImage('assets/images/login_screen.jpeg');
 
-  /// File path: assets/images/login_screen_arabic .jpeg
+  /// File path: assets/images/login_screen_arabic.jpeg
   AssetGenImage get loginScreenArabic =>
-      const AssetGenImage('assets/images/login_screen_arabic .jpeg');
+      const AssetGenImage('assets/images/login_screen_arabic.jpeg');
+
+  /// File path: assets/images/otp_screen.jpeg
+  AssetGenImage get otpScreen =>
+      const AssetGenImage('assets/images/otp_screen.jpeg');
 
   /// File path: assets/images/register_screen.jpeg
   AssetGenImage get registerScreen =>
@@ -65,9 +73,11 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
     cibApple,
     firstScreen,
+    forgotPasswordScreen,
     googleIc,
     loginScreen,
     loginScreenArabic,
+    otpScreen,
     registerScreen,
     registerScreenArabic,
     splash,
