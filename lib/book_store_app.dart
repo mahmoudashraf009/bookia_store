@@ -4,6 +4,7 @@ import 'package:bookia_store/features/home/ui/home_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'core/helper/app_constants.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/navigator.dart';
 import 'features/welcome/ui/welcome_screen.dart';
@@ -28,9 +29,17 @@ class BookStoreApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: "DM",
           ),
-          home:  OtpScreen(),
+          home:  WelcomeScreen(),
         );
       },
     );
+  }
+
+  Widget startScreen(){
+    if(AppConstants.token!=null){
+      return WelcomeScreen();
+    }else{
+      return HomeScreen();
+    }
   }
 }

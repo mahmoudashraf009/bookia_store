@@ -1,14 +1,18 @@
+import 'package:bookia_store/core/helper/app_constants.dart';
 import 'package:bookia_store/features/home/ui/home_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'book_store_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  AppConstants.token=prefs.getString("token");
   runApp(
     EasyLocalization(
-      supportedLocales: const [
+      supportedLocales:  [
         Locale('en'),
         Locale('ar'),
       ],

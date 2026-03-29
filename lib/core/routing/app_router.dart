@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/auth/cubit/auth_cubit.dart';
 import '../../features/auth/ui/forgot_password_screen.dart';
 import '../../features/auth/ui/otp_screen.dart';
+import '../../features/auth/ui/wishlist_screen.dart';
 import 'routes.dart';
 import '../../features/auth/ui/login_screen.dart';
 import '../../features/auth/ui/register_screen.dart';
@@ -19,12 +22,18 @@ class AppRouter {
 
       case Routes.login:
         return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => AuthCubit(),
+            child: const LoginScreen(),
+          ),
         );
 
       case Routes.register:
         return MaterialPageRoute(
-          builder: (_) => const RegisterScreen(),
+         builder: (_) => BlocProvider(
+           create: (context) => AuthCubit(),
+           child: const RegisterScreen(),
+    ),
         );
 
       case Routes.home:
@@ -45,7 +54,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const OtpScreen(),
         );
-
+      case Routes.wishlist:
+        return MaterialPageRoute(
+          builder: (_) => const WishlistScreen(),
+        );
       default:
         return null;
     }

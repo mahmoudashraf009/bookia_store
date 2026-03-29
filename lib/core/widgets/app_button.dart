@@ -6,8 +6,12 @@ class AppButton extends StatelessWidget {
   final String text;
   final Color? backgroundColor;
   final VoidCallback? onPressed;
-  const AppButton({super.key,this.backgroundColor, required this.text, this.onPressed,});
-  @override
+  const AppButton({
+    super.key,
+    this.backgroundColor,
+    required this.text,
+    this.onPressed,
+  });  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,

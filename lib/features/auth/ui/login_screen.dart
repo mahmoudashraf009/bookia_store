@@ -1,10 +1,13 @@
 import 'package:bookia_store/core/theme/app_colors.dart';
 import 'package:bookia_store/core/widgets/app_button.dart';
 import 'package:bookia_store/core/widgets/app_text_field.dart';
+import 'package:bookia_store/features/auth/cubit/auth_cubit.dart';
 import 'package:bookia_store/features/auth/ui/register_screen.dart';
 import 'package:bookia_store/gen/assets.gen.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/routing/navigator.dart';
@@ -17,7 +20,17 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 class _LoginScreenState extends State<LoginScreen> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   bool obscurePassword = true;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,11 +59,15 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 30.h),
 
-            AppTextField(hintText: LocaleKeys.enterEmail.tr()),
+            AppTextField(
+                keyboardType: TextInputType.emailAddress,
+                controller: emailController,
+                hintText: LocaleKeys.enterEmail.tr()),
 
             SizedBox(height: 15.h),
 
             AppTextField(
+              controller: passwordController,
               hintText: LocaleKeys.enterPassword.tr(),
               obscureText: obscurePassword,
               suffixIcon: IconButton(
@@ -79,14 +96,48 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: 20.h),
-            AppButton(text: LocaleKeys.login.tr()),
+            BlocListener<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthLoadingState) {
+                  showDialog(context: context, builder: (context) =>
+                      Center(child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      )));
+                } else if (state is AuthErrorState) {
+                  Navigator.pop(context);
+                  showDialog(context: context, builder: (context) =>
+                      AlertDialog(
+                        title: Text("Error"),
+                        content: Text("Something wrong please try again"),
+                      ));
+                } else if (state is AuthSuccessState) {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, Routes.home, (route) => false);
+                }
+              },
+              child: AppButton(text: LocaleKeys.login.tr(),
+                onPressed: () {
+                  if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Please enter email and password")),
+                    );
+                    return;
+                  }
+                  context.read<AuthCubit>().login(
+                    email: emailController.text,
+                    password: passwordController.text,
+                  );
+                },
+              ),
+            ),
             SizedBox(height: 20.h),
             Row(
               children: [
                 Expanded(child: Divider()),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: Text(LocaleKeys.orText.tr(), style: TextStyle(color: Colors.grey)),
+                  child: Text(LocaleKeys.orText.tr(),
+                      style: TextStyle(color: Colors.grey)),
                 ),
                 Expanded(child: Divider()),
               ],
@@ -134,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(color: AppColors.darkColor),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     AppNavigator.pushNamed(Routes.register);
                   },
                   child: Text(
