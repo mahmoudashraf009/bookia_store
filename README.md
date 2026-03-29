@@ -93,7 +93,11 @@ Once verified, the user can proceed to reset their password securely
 
 
 ---
+![Home Screen](assets/images/Home_screen.jpeg)
 
+
+
+---
 ## 🛠️ Built With
 - Flutter
 - Dart
