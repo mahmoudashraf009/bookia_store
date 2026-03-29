@@ -1,9 +1,13 @@
 import 'package:bookia_store/core/helper/app_constants.dart';
 import 'package:bookia_store/features/home/ui/home_screen.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'book_store_app.dart';
+import 'features/home/cubit/home_cubit.dart';
+import 'features/home/data/repo/home_repo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,13 +16,13 @@ void main() async {
   AppConstants.token=prefs.getString("token");
   runApp(
     EasyLocalization(
-      supportedLocales:  [
-        Locale('en'),
-        Locale('ar'),
-      ],
+      supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/translations',
-      fallbackLocale:  Locale('en'),
-      child:  BookStoreApp(),
+      fallbackLocale: Locale('en'),
+      child: BlocProvider(
+        create: (context) => HomeCubit(HomeRepo(Dio())),
+        child: BookStoreApp(),
+      ),
     ),
   );
 }

@@ -8,7 +8,12 @@ class HomeRepo {
 
   Future<List<BookModel>> getBestSeller() async {
     final response = await dio.get(
-      'https://codingarabic.online/api/best-seller',
+      'https://codingarabic.online/api/books',
+      options: Options(
+        headers: {
+          'Accept': 'application/json',
+        },
+      ),
     );
     final List data = response.data['data'];
     return data.map((e) => BookModel.fromJson(e)).toList();

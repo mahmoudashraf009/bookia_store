@@ -1,9 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/cubit/auth_cubit.dart';
 import '../../features/auth/ui/forgot_password_screen.dart';
 import '../../features/auth/ui/otp_screen.dart';
 import '../../features/auth/ui/wishlist_screen.dart';
+import '../../features/home/cubit/home_cubit.dart';
+import '../../features/home/data/repo/home_repo.dart';
 import 'routes.dart';
 import '../../features/auth/ui/login_screen.dart';
 import '../../features/auth/ui/register_screen.dart';
@@ -57,6 +60,10 @@ class AppRouter {
       case Routes.wishlist:
         return MaterialPageRoute(
           builder: (_) => const WishlistScreen(),
+        );
+      case Routes.home:
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
         );
       default:
         return null;
