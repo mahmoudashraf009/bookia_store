@@ -1,10 +1,7 @@
-import 'package:bookia_store/core/routing/routes.dart';
 import 'package:bookia_store/core/widgets/app_bottom_nav.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../generated/locale_keys.g.dart';
 import '../cubit/home_cubit.dart';
 import 'widgets/home_header.dart';
 import 'widgets/banner_slider.dart';
@@ -29,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -42,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const BannerSlider(),
                 SizedBox(height: 20.h),
                 Text(
-                  LocaleKeys.buy.tr(),
+                  "Best Seller",
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
@@ -50,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 15.h),
                 BestSellerSection(),
+                SizedBox(height: 10.h),
               ],
             ),
           ),
@@ -58,4 +57,4 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: AppBottomNav(currentIndex: 0),
     );
   }
-}
+}

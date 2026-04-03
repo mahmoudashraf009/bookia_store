@@ -11,23 +11,22 @@ class AuthCubit extends Cubit<AuthState> {
     required String email,
     required String password,
   }) async {
-    await(AuthLoadingState());
+    emit(AuthLoadingState());
     final response = await AuthRepo.login(email: email, password: password);
     if (response == "success") {
-      await(AuthSuccessState());
+      emit(AuthSuccessState());
     } else {
-      await(AuthErrorState());
+      emit(AuthErrorState());
     }
   }
 
-  // ✅ أضف دالة register
   Future<void> register({
     required String name,
     required String email,
     required String password,
     required String passwordConfirmation,
   }) async {
-    await (AuthLoadingState());
+    emit(AuthLoadingState());
     final response = await AuthRepo.register(
       name: name,
       email: email,

@@ -15,4 +15,9 @@ class AppNavigator {
     return navigatorKey.currentState!
         .pushReplacementNamed(routeName);
   }
+
+  static Future pushNamedAndRemoveUntil(String routeName) {
+    return navigatorKey.currentState!
+        .pushNamedAndRemoveUntil(routeName, (route) => false);
+  }
 }
