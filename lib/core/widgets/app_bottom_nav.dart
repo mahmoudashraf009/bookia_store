@@ -3,6 +3,7 @@ import 'package:bookia_store/core/routing/routes.dart';
 import 'package:bookia_store/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class AppBottomNav extends StatelessWidget {
   final int currentIndex;
@@ -44,19 +45,27 @@ class AppBottomNav extends StatelessWidget {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
+            icon: SvgPicture.asset(
+              "assets/icons/Home.svg",
+            ),
             label: "",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_border),
+            icon: SvgPicture.asset(
+          "assets/icons/Bookmark.svg"
+            ),
             label: "",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
+            icon: SvgPicture.asset(
+                "assets/icons/Category.svg"
+            ),
             label: "",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
+            icon: SvgPicture.asset(
+                "assets/icons/Profile.svg"
+            ),
             label: "",
           ),
         ],
