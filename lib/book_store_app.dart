@@ -29,7 +29,7 @@ class BookStoreApp extends StatelessWidget {
           theme: ThemeData(
             fontFamily: "DM",
           ),
-          home:  WelcomeScreen(),
+          home:  startScreen(),
         );
       },
     );
