@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HomeCubit>().getSliders();
       context.read<HomeCubit>().getBestSeller();
     });
   }

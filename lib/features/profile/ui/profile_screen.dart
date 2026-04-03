@@ -133,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildMenuItem(
             icon: Icons.lock_outline,
             title: "Reset Password",
-            onTap: () => AppNavigator.pushNamed(Routes.forgotPassword),
+            onTap: () => AppNavigator.pushNamed(Routes.forgotPassword, arguments: ''),
           ),
           _buildMenuItem(
             icon: Icons.help_outline,

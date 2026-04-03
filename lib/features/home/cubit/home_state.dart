@@ -4,15 +4,23 @@ abstract class HomeState {}
 
 class HomeInitial extends HomeState {}
 
-class HomeLoading extends HomeState {}
+// Get Best Seller
+class GetBestSellerLoading extends HomeState {}
 
-class HomeSuccess extends HomeState {
-  final List<BookModel> books;
-  final List<String> sliders;
-  HomeSuccess(this.books, {this.sliders = const []});
+class GetBestSellerSuccess extends HomeState {}
+
+class GetBestSellerError extends HomeState {
+  final String message;
+  GetBestSellerError(this.message);
 }
 
-class HomeError extends HomeState {
+// Get Sliders
+class GetSlidersLoading extends HomeState {}
+
+class GetSlidersSuccess extends HomeState {}
+
+class GetSlidersError extends HomeState {
   final String message;
-  HomeError(this.message);
-}
+  GetSlidersError(this.message);
+}
+

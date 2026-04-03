@@ -59,4 +59,113 @@ class AuthRepo {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("token", token);
   }
+
+  static Future<String> logout() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString("token");
+      final response = await dio.post(
+        "https://codingarabic.online/api/logout",
+        options: Options(headers: {"Authorization": "Bearer $token"}),
+      );
+      if (response.statusCode == 200) {
+        prefs.remove("token");
+        return "success";
+      } else {
+        throw Exception("Something went wrong");
+      }
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+  static Future<String> sendForgetPasswordLink({required String email}) async {
+    try {
+      final response = await dio.post(
+        "https://codingarabic.online/api/send-forget-password",
+        data: {"email": email},
+      );
+      if (response.statusCode == 200) {
+        return "success";
+      } else {
+        throw Exception("Something went wrong");
+      }
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+  static Future<String> checkForgetPasswordCode({required String code}) async {
+    try {
+      final response = await dio.post(
+        "https://codingarabic.online/api/check-forget-password",
+        data: {"code": code},
+      );
+      if (response.statusCode == 200) {
+        return "success";
+      } else {
+        throw Exception("Something went wrong");
+      }
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+  static Future<String> resetPassword({
+    required String email,
+    required String password,
+    required String passwordConfirmation,
+    required String code,
+  }) async {
+    try {
+      final response = await dio.post(
+        "https://codingarabic.online/api/reset-password",
+        data: {
+          "email": email,
+          "password": password,
+          "password_confirmation": passwordConfirmation,
+          "code": code,
+        },
+      );
+      if (response.statusCode == 200) {
+        return "success";
+      } else {
+        throw Exception("Something went wrong");
+      }
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+  static Future<String> resendVerifyLink({required String email}) async {
+    try {
+      final response = await dio.get(
+        "https://codingarabic.online/api/resend-verify",
+        data: {"email": email},
+      );
+      if (response.statusCode == 200) {
+        return "success";
+      } else {
+        throw Exception("Something went wrong");
+      }
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+  static Future<String> verifyEmail({required String code}) async {
+    try {
+      final response = await dio.post(
+        "https://codingarabic.online/api/verify-email",
+        data: {"code": code},
+      );
+      if (response.statusCode == 200) {
+        return "success";
+      } else {
+        throw Exception("Something went wrong");
+      }
+    } catch (e) {
+      return e.toString();
+    }
+  }
 }

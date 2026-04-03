@@ -9,7 +9,7 @@ class HomeRepo {
 
   Future<List<BookModel>> getBestSeller() async {
     final response = await dio.get(
-      'https://codingarabic.online/api/books',
+      'https://codingarabic.online/api/products',
       options: Options(
         headers: {
           'Accept': 'application/json',
@@ -18,7 +18,7 @@ class HomeRepo {
         },
       ),
     );
-    final List data = response.data['data'];
+    final List data = response.data['data']['products'];
     return data.map((e) => BookModel.fromJson(e)).toList();
   }
 
@@ -32,7 +32,7 @@ class HomeRepo {
           },
         ),
       );
-      final List data = response.data['data'];
+      final List data = response.data['data']['sliders'];
       return data.map((e) => e['image'].toString()).toList();
     } catch (e) {
       return [];

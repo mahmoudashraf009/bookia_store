@@ -17,10 +17,26 @@ class _BannerSliderState extends State<BannerSlider> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (previous, current) =>
+          current is GetSlidersLoading ||
+          current is GetSlidersSuccess ||
+          current is GetSlidersError,
       builder: (context, state) {
-        List<String> sliders = [];
-        if (state is HomeSuccess && state.sliders.isNotEmpty) {
-          sliders = state.sliders;
+        final cubit = context.read<HomeCubit>();
+        List<String> sliders = cubit.sliders;
+
+        if (state is GetSlidersLoading && sliders.isEmpty) {
+          // You could return a shimmer effect here
+          return Container(
+            height: 150.h,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Center(
+              child: CircularProgressIndicator(color: Color(0xffC49A3A)),
+            ),
+          );
         }
 
         if (sliders.isEmpty) {

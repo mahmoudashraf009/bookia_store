@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/cubit/auth_cubit.dart';
 import '../../features/auth/ui/forgot_password_screen.dart';
 import '../../features/auth/ui/otp_screen.dart';
+import '../../features/auth/ui/reset_password_screen.dart';
 import '../../features/auth/ui/wishlist_screen.dart';
 import '../../features/home/cubit/home_cubit.dart';
 import '../../features/home/data/repo/home_repo.dart';
@@ -54,13 +55,33 @@ class AppRouter {
         );
       case Routes.forgotPassword:
         return MaterialPageRoute(
-          builder: (_) => const ForgotPasswordScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => AuthCubit(),
+            child: const ForgotPasswordScreen(),
+          ),
         );
 
       case Routes.otp:
+        final email = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => const OtpScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => AuthCubit(),
+            child: OtpScreen(email: email),
+          ),
         );
+
+      case Routes.resetPassword:
+        final Map<String, dynamic> args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => AuthCubit(),
+            child: ResetPasswordScreen(
+              email: args['email'],
+              code: args['code'],
+            ),
+          ),
+        );
+
       case Routes.wishlist:
         return MaterialPageRoute(
           builder: (_) => const WishlistScreen(),

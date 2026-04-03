@@ -8,5 +8,6 @@ class Routes {
   static const String otp = '/otp';
   static const String wishlist = '/wishlist';
   static const String cart = '/cart';
+  static const String resetPassword = '/resetPassword';
   static const String profile = '/profile';
 }

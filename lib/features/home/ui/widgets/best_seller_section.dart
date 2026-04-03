@@ -12,14 +12,20 @@ class BestSellerSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (previous, current) =>
+          current is GetBestSellerSuccess ||
+          current is GetBestSellerLoading ||
+          current is GetBestSellerError,
       builder: (context, state) {
-        if (state is HomeLoading) {
+        final cubit = context.read<HomeCubit>();
+
+        if (state is GetBestSellerLoading && cubit.bestSellerBooks.isEmpty) {
           return Center(
             child: CircularProgressIndicator(
               color: AppColors.primaryColor,
             ),
           );
-        } else if (state is HomeError) {
+        } else if (state is GetBestSellerError && cubit.bestSellerBooks.isEmpty) {
           return Center(
             child: Column(
               children: [
@@ -42,7 +48,7 @@ class BestSellerSection extends StatelessWidget {
               ],
             ),
           );
-        } else if (state is HomeSuccess) {
+        } else if (cubit.bestSellerBooks.isNotEmpty) {
           return GridView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
@@ -52,9 +58,9 @@ class BestSellerSection extends StatelessWidget {
               mainAxisSpacing: 16.h,
               childAspectRatio: 0.65,
             ),
-            itemCount: state.books.length,
+            itemCount: cubit.bestSellerBooks.length,
             itemBuilder: (context, index) {
-              return _buildBookItem(context, state.books[index]);
+              return _buildBookItem(context, cubit.bestSellerBooks[index]);
             },
           );
         }

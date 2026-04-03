@@ -8,7 +8,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'book_store_app.dart';
 import 'features/home/cubit/home_cubit.dart';
 import 'features/home/data/repo/home_repo.dart';
-
+import 'features/cart/cubit/cart_cubit.dart';
+import 'features/cart/data/repo/cart_repo.dart';
+import 'features/wishlist/cubit/wishlist_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -19,8 +21,12 @@ void main() async {
       supportedLocales: const [Locale('en'), Locale('ar')],
       path: 'assets/translations',
       fallbackLocale: Locale('en'),
-      child: BlocProvider(
-        create: (context) => HomeCubit(HomeRepo(Dio())),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => HomeCubit(HomeRepo(Dio()))),
+          BlocProvider(create: (context) => CartCubit(CartRepo(Dio()))),
+          BlocProvider(create: (context) => WishlistCubit()),
+        ],
         child: BookStoreApp(),
       ),
     ),

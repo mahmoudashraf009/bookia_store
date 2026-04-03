@@ -4,9 +4,14 @@ import 'package:bookia_store/gen/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/routing/navigator.dart';
+import '../../../core/routing/routes.dart';
+import '../cubit/auth_cubit.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+  final String email;
+  const OtpScreen({super.key, required this.email});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -31,7 +36,38 @@ class _OtpScreenState extends State<OtpScreen> {
             onPressed: () => Navigator.pop(context),
           ),
         ),
-        body: Padding(
+        body: BlocListener<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is CheckForgetPasswordCodeLoadingState) {
+              showDialog(
+                context: context,
+                builder: (context) => Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              );
+            } else if (state is CheckForgetPasswordCodeErrorState) {
+              Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text("Error"),
+                  content: Text("Invalid OTP code, please try again"),
+                ),
+              );
+            } else if (state is CheckForgetPasswordCodeSuccessState) {
+              Navigator.pop(context); // pop loading
+              AppNavigator.pushNamed(
+                Routes.resetPassword,
+                arguments: {
+                  'email': widget.email,
+                  'code': controllers.map((c) => c.text).join(),
+                },
+              );
+            }
+          },
+          child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 22.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +122,18 @@ class _OtpScreenState extends State<OtpScreen> {
               SizedBox(height: 25.h),
               AppButton(
                 text: LocaleKeys.verify.tr(),
-                onPressed: () {},
+                onPressed: () {
+                  String code = controllers.map((c) => c.text).join();
+                  if (code.length < 6) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Please enter full code")),
+                    );
+                    return;
+                  }
+                  context
+                      .read<AuthCubit>()
+                      .checkForgetPasswordCode(code: code);
+                },
               ),
               Spacer(),
               Row(
@@ -110,9 +157,10 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               SizedBox(height: 30.h),
             ],
-          ),
-        ),
-      ),
-    );
+          ), // Column
+        ), // Padding
+      ), // BlocListener
+    ), // Scaffold
+    ); // GestureDetector
   }
 }

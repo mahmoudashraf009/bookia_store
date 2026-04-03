@@ -36,10 +36,10 @@ class BookStoreApp extends StatelessWidget {
   }
 
   Widget startScreen(){
-    if(AppConstants.token!=null){
-      return WelcomeScreen();
-    }else{
+    if(AppConstants.token != null){
       return HomeScreen();
+    } else {
+      return WelcomeScreen();
     }
   }
 }

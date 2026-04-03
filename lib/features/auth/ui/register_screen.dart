@@ -169,7 +169,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      AppNavigator.pushNamed(Routes.login);
+                      AppNavigator.pushNamed(Routes.login, arguments: '');
                     },
                     child: Text(
                       LocaleKeys.loginNow.tr(),

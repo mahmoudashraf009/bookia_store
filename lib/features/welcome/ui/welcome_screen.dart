@@ -51,14 +51,14 @@ class WelcomeScreen extends StatelessWidget {
             AppButton(
               text: LocaleKeys.login.tr(),
               onPressed: () {
-                AppNavigator.pushNamed(Routes.login);
+                AppNavigator.pushNamed(Routes.login, arguments: '');
               },
             ),
             SizedBox(height: 15.h),
             AppButton(
               text:LocaleKeys.Register.tr(),
               onPressed: () {
-                AppNavigator.pushNamed(Routes.register);
+                AppNavigator.pushNamed(Routes.register, arguments: '');
               },
               backgroundColor: Colors.white,
             ),

@@ -19,13 +19,13 @@ class BookModel {
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
     return BookModel(
-      id: json['id'],
+      id: json['id'] ?? 0,
       title: json['title'] ?? '',
       image: json['image'] ?? '',
       price: json['price'].toString(),
       inWishlist: json['in_wishlist'] ?? false,
       description: json['description'] ?? '',
-      category: json['category'] ?? '',
+      category: json['category'] ?? "KEYS: ${json.keys.join(', ')}",
     );
   }
 }

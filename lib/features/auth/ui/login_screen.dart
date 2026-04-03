@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: () => AppNavigator.pushNamed(Routes.forgotPassword),
+                onTap: () => AppNavigator.pushNamed(Routes.forgotPassword, arguments: ''),
                 child: Text(
                   LocaleKeys.forgotPassword.tr(),
                   style: TextStyle(
@@ -111,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         content: Text("Something wrong please try again"),
                       ));
                 } else if (state is AuthSuccessState) {
+                  Navigator.pop(context);
                   Navigator.pushNamedAndRemoveUntil(
                       context, Routes.home, (route) => false);
                 }
@@ -186,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    AppNavigator.pushNamed(Routes.register);
+                    AppNavigator.pushNamed(Routes.register, arguments: '');
                   },
                   child: Text(
                     LocaleKeys.registerNow.tr(),
