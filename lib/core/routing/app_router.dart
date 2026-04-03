@@ -7,11 +7,14 @@ import '../../features/auth/ui/otp_screen.dart';
 import '../../features/auth/ui/wishlist_screen.dart';
 import '../../features/home/cubit/home_cubit.dart';
 import '../../features/home/data/repo/home_repo.dart';
+import '../../features/profile/cubit/profile_cubit.dart';
+import '../../features/profile/ui/profile_screen.dart';
 import 'routes.dart';
 import '../../features/auth/ui/login_screen.dart';
 import '../../features/auth/ui/register_screen.dart';
 import '../../features/home/ui/home_screen.dart';
 import '../../features/home/ui/book_details_screen.dart';
+import '../../features/home/ui/cart_screen.dart';
 import '../../features/welcome/ui/welcome_screen.dart';
 
 class AppRouter {
@@ -47,6 +50,7 @@ class AppRouter {
       case Routes.bookDetails:
         return MaterialPageRoute(
           builder: (_) => const BookDetailsScreen(),
+          settings: settings,
         );
       case Routes.forgotPassword:
         return MaterialPageRoute(
@@ -61,12 +65,19 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const WishlistScreen(),
         );
-      case Routes.home:
+      case Routes.cart:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => const CartScreen(),
+        );
+      case Routes.profile:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ProfileCubit(),
+            child: const ProfileScreen(),
+          ),
         );
       default:
         return null;
     }
   }
-}
+}
