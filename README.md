@@ -52,15 +52,30 @@ The project follows a **Feature-First** structure to ensure scalability and main
 
 ## 📱 Visual Showcase
 
-| Welcome Screen | Login (English) | Login (Arabic) |
-| :---: | :---: | :---: |
-| ![Welcome](assets/images/welcome_screen_english.jpeg) | ![Login EN](assets/images/login_screen.jpeg) | ![Login AR](assets/images/login_screen_arabic%20.jpeg) |
+### 🔐 Authentication & Onboarding
+| Welcome (EN) | Welcome (AR) | Login (EN) | Login (AR) |
+| :---: | :---: | :---: | :---: |
+| ![Welcome EN](assets/images/welcome_screen_english.jpeg) | ![Welcome AR](assets/images/welcome_screen_arabic.jpeg) | ![Login EN](assets/images/login_screen.jpeg) | ![Login AR](assets/images/login_screen_arabic.jpeg) |
 
-| Register Screen | Forgot Password | OTP Verification |
-| :---: | :---: | :---: |
-| ![Register](assets/images/register_screen.jpeg) | ![Forgot PWD](assets/images/forgot_password_screen.jpeg) | ![OTP](assets/images/otp_screen.jpeg) |
+| Register (EN) | Register (AR) | Forgot Password | OTP Verification |
+| :---: | :---: | :---: | :---: |
+| ![Register EN](assets/images/register_screen.jpeg) | ![Register AR](assets/images/register_screen_arabic.jpeg) | ![Forgot PWD](assets/images/forgot_password_screen.jpeg) | ![OTP](assets/images/otp_screen.jpeg) |
 
----
+### 🏠 Home & Shopping
+| Home (EN) | Home (AR) | Wishlist (EN) | Wishlist (AR) |
+| :---: | :---: | :---: | :---:|
+| ![Home EN](assets/images/home_profile_en.jpeg) | ![Home AR](assets/images/home_profile_ar.jpeg) | ![Wishlist EN](assets/images/wishlist_en.jpeg) | ![Wishlist AR](assets/images/wishlist_ar.jpeg) |
+
+### 🛒 Cart & Checkout
+| My Cart (EN) | My Cart (AR) | Place Order (EN) | Place Order (AR) |
+| :---: | :---: | :---: | :---: |
+| ![Cart EN](assets/images/my_cart_en.jpeg) | ![Cart AR](assets/images/my_cart_ar.jpeg) | ![Order EN](assets/images/place_order_en.jpeg) | ![Order AR](assets/images/place_order_ar.jpeg) |
+
+### 👤 Profile & Settings
+| Profile (EN) | Profile (AR) |
+| :---: | :---: |
+| ![Profile EN](assets/images/profile_en.jpeg) | ![Profile AR](assets/images/profile_ar.jpeg) |
+
 
 ## 🏁 Getting Started
 
