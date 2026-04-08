@@ -9,7 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/routing/navigator.dart';
 import '../../../core/routing/routes.dart';
-import '../../../generated/locale_keys.g.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -38,13 +37,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -53,10 +51,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           if (state is AuthLoadingState) {
             showDialog(
               context: context,
+              barrierDismissible: false,
               builder: (context) => Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primaryColor,
-                ),
+                child: CircularProgressIndicator(color: AppColors.primaryColor),
               ),
             );
           } else if (state is AuthErrorState) {
@@ -64,8 +61,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: Text("Error"),
-                content: Text("Something went wrong, please try again"),
+                title: Text("error".tr()),
+                content: Text("somethingWentWrong".tr()),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text("done".tr()),
+                  )
+                ],
               ),
             );
           } else if (state is AuthSuccessState) {
@@ -80,28 +83,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               SizedBox(height: 20.h),
               Text(
-                LocaleKeys.helloRegister.tr(),
+                "helloRegister".tr(),
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: theme.colorScheme.onSurface,
                 ),
               ),
               SizedBox(height: 30.h),
               AppTextField(
                 controller: nameController,
-                hintText: LocaleKeys.username.tr(),
+                hintText: "username".tr(),
               ),
               SizedBox(height: 15.h),
               AppTextField(
                 keyboardType: TextInputType.emailAddress,
                 controller: emailController,
-                hintText: LocaleKeys.email.tr(),
+                hintText: "email".tr(),
               ),
               SizedBox(height: 15.h),
               AppTextField(
                 controller: passwordController,
-                hintText: LocaleKeys.password.tr(),
+                hintText: "password".tr(),
                 obscureText: obscurePassword,
                 suffixIcon: IconButton(
                   icon: Icon(
@@ -116,47 +119,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
               SizedBox(height: 15.h),
               AppTextField(
                 controller: confirmPasswordController,
-                hintText: LocaleKeys.confirmPassword.tr(),
+                hintText: "confirmPassword".tr(),
                 obscureText: obscureConfirmPassword,
                 suffixIcon: IconButton(
                   icon: Icon(
-                    obscureConfirmPassword
-                        ? Icons.visibility_off
-                        : Icons.visibility,
+                    obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
                     color: Colors.grey,
                   ),
                   onPressed: () {
-                    setState(
-                            () => obscureConfirmPassword = !obscureConfirmPassword);
+                    setState(() => obscureConfirmPassword = !obscureConfirmPassword);
                   },
                 ),
               ),
               SizedBox(height: 25.h),
               AppButton(
-                text: LocaleKeys.Register.tr(),
+                text: "Register".tr(),
                 onPressed: () {
                   if (nameController.text.isEmpty ||
                       emailController.text.isEmpty ||
                       passwordController.text.isEmpty ||
                       confirmPasswordController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Please fill all fields")),
-                    );
-                    return;
-                  }
-                  if (passwordController.text !=
-                      confirmPasswordController.text) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Passwords do not match")),
+                      SnackBar(content: Text("somethingWentWrong".tr())),
                     );
                     return;
                   }
                   context.read<AuthCubit>().register(
-                    name: nameController.text,
-                    email: emailController.text,
-                    password: passwordController.text,
-                    passwordConfirmation: confirmPasswordController.text,
-                  );
+                        name: nameController.text,
+                        email: emailController.text,
+                        password: passwordController.text,
+                        passwordConfirmation: confirmPasswordController.text,
+                      );
                 },
               ),
               SizedBox(height: 30.h),
@@ -164,15 +157,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    LocaleKeys.alreadyAccount.tr(),
-                    style: const TextStyle(color: AppColors.darkColor),
+                    "alreadyAccount".tr(),
+                    style: TextStyle(color: theme.colorScheme.onSurface.withOpacity(0.7)),
                   ),
                   GestureDetector(
                     onTap: () {
                       AppNavigator.pushNamed(Routes.login, arguments: '');
                     },
                     child: Text(
-                      LocaleKeys.loginNow.tr(),
+                      "loginNow".tr(),
                       style: TextStyle(
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.bold,

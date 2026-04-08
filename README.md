@@ -1,109 +1,113 @@
-# 📚 Bookia App
+# 📚 Bookia Store App
 
-Bookia is a mobile application designed to help users browse and order books easily.  
-The app focuses on providing a simple and clean user experience with support for multiple languages.
+![Bookia Banner](assets/images/bookia_banner.png)
 
----
-
-## ✨ Features
-- Clean and modern UI
-- User authentication (Login & Register)
-- Multi-language support (English & Arabic)
-- Localized authentication screens (Welcome, Login, and Register)
-- Responsive layout
+**Bookia Store** is a premium mobile application designed for book enthusiasts. It provides a seamless and aesthetically pleasing experience for browsing, searching, and purchasing books. Built with a focus on modern design principles, performance, and multi-language support.
 
 ---
 
-## 📱 Screens
+## 🚀 Features
 
-### Splash Screen
-![Splash Screen](assets/images/first_screen.jpeg)
+### 🔐 Authentication & Security
+- **Smart Onboarding**: Beautiful welcome and splash screens.
+- **Secure Login/Register**: Dedicated screens for user authentication.
+- **Password Recovery**: Integrated "Forgot Password" flow with OTP (One-Time Password) verification.
+- **Localization**: Full support for English and Arabic in all auth flows.
 
-This is the splash screen that appears when the application starts.  
-It displays the **Bookia logo** while the app loads before navigating to the main screen.
+### 🏠 Home & Discovery
+- **Dynamic Banners**: Interactive slider for featured books and promotions.
+- **Smart Catalog**: Browse books with quick access to details.
+- **Detailed View**: Comprehensive book information including description and pricing.
 
----
+### 🛒 Shopping Experience
+- **Wishlist Management**: Keep track of books you love.
+- **Cart System**: Seamlessly add items to your cart and manage quantities.
+- **Order Tracking**: (In Progress) View your previous orders and their status.
 
-### Welcome Screen (Arabic)
-![Welcome Screen Arabic](assets/images/welcome_screen_arabic.jpeg)
-
-This screen is the Arabic version of the welcome page.  
-It allows users to choose between **logging in** or **creating a new account**, demonstrating the app's **Arabic localization support**.
-
----
-
-### Welcome Screen (English)
-![Welcome Screen](assets/images/welcome_screen_english.jpeg)
-
-This is the English version of the welcome screen.  
-Users can select **Login** or **Register**, and it also includes a **language switch icon** to change the app language.
-
----
-
-### Login Screen (English)
-![Login Screen English](assets/images/login_screen.jpeg)
-
-The login screen allows users to sign in using their **email and password**.  
-It also supports **Google sign-in and Apple sign-in**, and provides an option to reset the password if forgotten.
+### ⚙️ User Experience
+- **RTL Support**: Native Right-to-Left support for Arabic users.
+- **Responsive Design**: Optimized for different screen sizes using `flutter_screenutil`.
+- **Theming**: Premium typography using the `DM Serif` font family.
 
 ---
 
-### Login Screen (Arabic)
-![login_screen_arabic .jpeg](assets/images/login_screen_arabic%20.jpeg))
+## 🛠️ Tech Stack & Architecture
 
-This is the Arabic localized version of the login screen, providing the same authentication functionality for Arabic-speaking users.
+### Core Technologies
+- **Framework**: [Flutter](https://flutter.dev/) (latest stable)
+- **State Management**: [flutter_bloc](https://pub.dev/packages/flutter_bloc) (Cubit for lightweight logic)
+- **Networking**: [Dio](https://pub.dev/packages/dio) with custom interceptors and logging.
+- **Local Storage**: [shared_preferences](https://pub.dev/packages/shared_preferences) for session management.
+- **Localization**: [easy_localization](https://pub.dev/packages/easy_localization) for multi-language support.
+
+### Architecture: Feature-First (Clean Architecture)
+The project follows a **Feature-First** structure to ensure scalability and maintainability:
+- `core/`: Global helpers, navigation, and shared constants.
+- `features/`: Modularized feature folders (Auth, Home, Cart, etc.) each containing:
+    - `data/`: Repositories and models.
+    - `cubit/`: State management logic.
+    - `ui/`: Responsive screens and specialized widgets.
+
+---
+
+## 📱 Visual Showcase
+
+| Welcome Screen | Login (English) | Login (Arabic) |
+| :---: | :---: | :---: |
+| ![Welcome](assets/images/welcome_screen_english.jpeg) | ![Login EN](assets/images/login_screen.jpeg) | ![Login AR](assets/images/login_screen_arabic%20.jpeg) |
+
+| Register Screen | Forgot Password | OTP Verification |
+| :---: | :---: | :---: |
+| ![Register](assets/images/register_screen.jpeg) | ![Forgot PWD](assets/images/forgot_password_screen.jpeg) | ![OTP](assets/images/otp_screen.jpeg) |
 
 ---
 
-### Register Screen (English)
-![Register Screen English](assets/images/register_screen.jpeg)
+## 🏁 Getting Started
 
-The registration screen allows new users to create an account by entering their **username, email, password, and password confirmation**.
+### Prerequisites
+- Flutter SDK (>= 3.10.0)
+- Android Studio / VS Code
+- Git
 
----
-
-### Register Screen (Arabic)
-![Register Screen Arabic](assets/images/register_screen_arabic.jpeg)
-
-This is the Arabic localized version of the registration screen, allowing users to create an account with full Arabic interface support.
-
----
-🔐 Forgot Password Screen
-
-![Forget Password Screen](assets/images/forgot_password_screen.jpeg)
-![Forget Password Screen_arabic](assets/images/forgot_password_screen_arabic.jpeg)
-
-
-
-This screen allows users to recover access to their accounts if they forget their password.
-Users need to enter the email address associated with their account, and the system will send a verification code to their email to continue the password reset process
-
-
----
-🔢 OTP Verification Screen
-
-![OTP Screen](assets/images/otp_screen.jpeg)
-![OTP Screen_arabic](assets/images/otp_screen_arabic.jpeg)
-
-
-
-After requesting a password reset, users are directed to the OTP verification screen.
-Here they enter the 6-digit verification code sent to their email.
-Once verified, the user can proceed to reset their password securely
-
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mahmoudashraf009/bookia_store.git
+   ```
+2. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+3. Generate localized keys (if added new translations):
+   ```bash
+   flutter pub run easy_localization:generate -S assets/translations -O lib/gen/translations -o locale_keys.g.dart -f keys
+   ```
+4. Run the app:
+   ```bash
+   flutter run
+   ```
 
 ---
-![Home Screen](assets/images/Home_screen.jpeg)
 
+## 📂 Project Structure
 
-
----
-## 🛠️ Built With
-- Flutter
-- Dart
-- Localization
+```text
+lib/
+├── core/               # Global configurations & routing
+├── features/           # App modules (Auth, Home, Cart, Profile, etc.)
+│   ├── auth/           # Login, Register, Forgot Password
+│   ├── home/           # Sliders, Book List
+│   ├── cart/           # Shopping Cart logic
+│   └── ...
+├── gen/                # Generated assets & translations
+├── book_store_app.dart # App level widget & theme
+└── main.dart           # Entry point
+```
 
 ---
 
 ## 👨‍💻 Author
-Mahmoud Ashraf
+**Mahmoud Ashraf**  
+*Flutter Developer*
+
+---

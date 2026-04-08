@@ -10,4 +10,13 @@ class Routes {
   static const String cart = '/cart';
   static const String resetPassword = '/resetPassword';
   static const String profile = '/profile';
+  static const String search = '/search';
+  static const String checkout = '/checkout';
+  static const String orderHistory = '/orderHistory';
+  static const String orderDetails = '/orderDetails';
+  static const String faq = '/faq';
+  static const String contactUs = '/contactUs';
+  static const String editProfile = '/editProfile';
+  static const String updatePassword = '/updatePassword';
+  static const String privacyTerms = '/privacyTerms';
 }

@@ -25,25 +25,40 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return TextFormField(
-      onTapOutside: (v){
+      onTapOutside: (v) {
         FocusScope.of(context).unfocus();
       },
-      keyboardType: TextInputType.emailAddress,
+      style: TextStyle(
+        color: theme.colorScheme.onSurface,
+        fontSize: 14.sp,
+      ),
+      keyboardType: keyboardType,
       controller: controller,
       obscureText: obscureText,
       validator: validator,
       autovalidateMode: autovalidateMode,
       decoration: InputDecoration(
         hintText: hintText,
-          hintStyle: AppTextStyle.hintStyle.copyWith(
-            color: AppColors.darkGrayColor,
-          ),
+        hintStyle: AppTextStyle.hintStyle.copyWith(
+          color: isDark ? Colors.grey.shade500 : AppColors.darkGrayColor,
+        ),
         filled: true,
-        fillColor: AppColors.grayColor,
+        fillColor: isDark ? theme.colorScheme.surfaceVariant.withOpacity(0.2) : AppColors.grayColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
           borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.r),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.r),
+          borderSide: BorderSide(color: theme.primaryColor, width: 1),
         ),
         suffixIcon: suffixIcon,
       ),

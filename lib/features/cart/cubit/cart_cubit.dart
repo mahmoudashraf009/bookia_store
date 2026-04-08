@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/models/cart_item_model.dart';
 import '../data/repo/cart_repo.dart';
-
+import '../../../core/helper/dio_helper.dart';
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
@@ -36,7 +36,7 @@ class CartCubit extends Cubit<CartState> {
         emit(CartError(message: "Failed to load cart"));
       }
     } catch (e) {
-      emit(CartError(message: e.toString()));
+      emit(CartError(message: DioHelper.getErrorMessage(e)));
     }
   }
 
@@ -52,7 +52,7 @@ class CartCubit extends Cubit<CartState> {
         emit(AddToCartError(message: "Failed to add to cart"));
       }
     } catch (e) {
-      emit(AddToCartError(message: e.toString()));
+      emit(AddToCartError(message: DioHelper.getErrorMessage(e)));
     }
   }
 
@@ -60,14 +60,14 @@ class CartCubit extends Cubit<CartState> {
     emit(UpdateCartLoading());
     try {
       final response = await cartRepo.updateCart(cartItemId, quantity);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         emit(UpdateCartSuccess());
         await getCart();
       } else {
         emit(UpdateCartError(message: "Failed to update cart"));
       }
     } catch (e) {
-      emit(UpdateCartError(message: e.toString()));
+      emit(UpdateCartError(message: DioHelper.getErrorMessage(e)));
     }
   }
 
@@ -75,14 +75,14 @@ class CartCubit extends Cubit<CartState> {
     emit(RemoveFromCartLoading());
     try {
       final response = await cartRepo.removeFromCart(cartItemId);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         emit(RemoveFromCartSuccess());
         await getCart();
       } else {
         emit(RemoveFromCartError(message: "Failed to remove from cart"));
       }
     } catch (e) {
-      emit(RemoveFromCartError(message: e.toString()));
+      emit(RemoveFromCartError(message: DioHelper.getErrorMessage(e)));
     }
   }
 }

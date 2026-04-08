@@ -1,4 +1,5 @@
 import 'package:bookia_store/core/widgets/app_bottom_nav.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,19 +13,13 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
         title: Text(
-          "Wishlist",
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          "myWishlist".tr(),
+          style: theme.appBarTheme.titleTextStyle,
         ),
       ),
       body: BlocBuilder<WishlistCubit, WishlistState>(
@@ -37,11 +32,11 @@ class WishlistScreen extends StatelessWidget {
                   Icon(
                     Icons.bookmark_border,
                     size: 80.sp,
-                    color: Colors.grey.shade300,
+                    color: Colors.grey.withOpacity(0.3),
                   ),
                   SizedBox(height: 16.h),
                   Text(
-                    "No books in wishlist yet",
+                    "emptyWishlist".tr(),
                     style: TextStyle(
                       fontSize: 16.sp,
                       color: Colors.grey,
@@ -67,24 +62,27 @@ class WishlistScreen extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: AppBottomNav(currentIndex: 1),
+      bottomNavigationBar: const AppBottomNav(currentIndex: 1),
     );
   }
 
   Widget _buildWishlistItem(BuildContext context, BookModel book) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return GestureDetector(
       onTap: () {
         AppNavigator.pushNamed(Routes.bookDetails, arguments: book);
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
+              color: isDark ? Colors.black26 : Colors.grey.withOpacity(0.1),
               blurRadius: 8,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -95,12 +93,12 @@ class WishlistScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
                 child: Image.network(
-                  book.image,
+                  book.image ?? '',
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) => Container(
-                    color: Colors.grey.shade200,
-                    child: Center(child: Icon(Icons.book, color: Colors.grey)),
+                    color: isDark ? Colors.grey.shade800 : Colors.grey.shade200,
+                    child: const Center(child: Icon(Icons.book, color: Colors.grey)),
                   ),
                 ),
               ),
@@ -111,12 +109,13 @@ class WishlistScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    book.title,
+                    book.title ?? '',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.onSurface,
                     ),
                   ),
                   SizedBox(height: 4.h),
@@ -124,10 +123,11 @@ class WishlistScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "₹${book.price}",
+                        "${book.price} ${"price".tr().split(' ').last}", // Attempting to use localized "Price" or generic
                         style: TextStyle(
                           fontSize: 13.sp,
-                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          color: theme.primaryColor,
                         ),
                       ),
                       GestureDetector(
@@ -136,7 +136,7 @@ class WishlistScreen extends StatelessWidget {
                         },
                         child: Icon(
                           Icons.cancel_outlined,
-                          color: Colors.grey,
+                          color: Colors.red.shade300,
                           size: 20.sp,
                         ),
                       ),

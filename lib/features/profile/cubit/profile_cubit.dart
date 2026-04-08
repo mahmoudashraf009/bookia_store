@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/repo/profile_repo.dart';
 import 'profile_state.dart';
-
+import '../../../core/helper/dio_helper.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitial());
 
@@ -11,7 +11,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       final profile = await ProfileRepo.getProfile();
       emit(ProfileLoaded(profile));
     } catch (e) {
-      emit(ProfileError(e.toString()));
+      emit(ProfileError(DioHelper.getErrorMessage(e)));
     }
   }
 
@@ -25,7 +25,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(LogoutError("Logout failed"));
       }
     } catch (e) {
-      emit(LogoutError(e.toString()));
+      emit(LogoutError(DioHelper.getErrorMessage(e)));
     }
   }
 
@@ -47,7 +47,29 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(UpdateProfileError(result));
       }
     } catch (e) {
-      emit(UpdateProfileError(e.toString()));
+      emit(UpdateProfileError(DioHelper.getErrorMessage(e)));
+    }
+  }
+
+  Future<void> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String confirmPassword,
+  }) async {
+    emit(UpdatePasswordLoading());
+    try {
+      final result = await ProfileRepo.updatePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+      );
+      if (result == "success") {
+        emit(UpdatePasswordSuccess());
+      } else {
+        emit(UpdatePasswordError(result));
+      }
+    } catch (e) {
+      emit(UpdatePasswordError(DioHelper.getErrorMessage(e)));
     }
   }
 }

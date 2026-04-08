@@ -1,6 +1,7 @@
 import 'package:bookia_store/core/theme/app_colors.dart';
 import 'package:bookia_store/features/home/cubit/home_cubit.dart';
 import 'package:bookia_store/features/home/cubit/home_state.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +12,8 @@ class BestSellerSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return BlocBuilder<HomeCubit, HomeState>(
       buildWhen: (previous, current) =>
           current is GetBestSellerSuccess ||
@@ -21,9 +24,7 @@ class BestSellerSection extends StatelessWidget {
 
         if (state is GetBestSellerLoading && cubit.bestSellerBooks.isEmpty) {
           return Center(
-            child: CircularProgressIndicator(
-              color: AppColors.primaryColor,
-            ),
+            child: CircularProgressIndicator(color: AppColors.primaryColor),
           );
         } else if (state is GetBestSellerError && cubit.bestSellerBooks.isEmpty) {
           return Center(
@@ -32,7 +33,7 @@ class BestSellerSection extends StatelessWidget {
                 Icon(Icons.error_outline, color: Colors.red, size: 40.sp),
                 SizedBox(height: 8.h),
                 Text(
-                  "Failed to load books",
+                  "somethingWentWrong".tr(),
                   style: TextStyle(fontSize: 14.sp, color: Colors.grey),
                 ),
                 SizedBox(height: 8.h),
@@ -43,7 +44,7 @@ class BestSellerSection extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
                   ),
-                  child: Text("Retry", style: TextStyle(color: Colors.white)),
+                  child: Text("resend".tr(), style: const TextStyle(color: Colors.white)),
                 ),
               ],
             ),
@@ -51,7 +52,7 @@ class BestSellerSection extends StatelessWidget {
         } else if (cubit.bestSellerBooks.isNotEmpty) {
           return GridView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 16.w,
@@ -64,12 +65,15 @@ class BestSellerSection extends StatelessWidget {
             },
           );
         }
-        return SizedBox();
+        return const SizedBox();
       },
     );
   }
 
   Widget _buildBookItem(BuildContext context, BookModel book) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
@@ -80,13 +84,13 @@ class BestSellerSection extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withAlpha(25),
+              color: isDark ? Colors.black26 : Colors.grey.withAlpha(25),
               blurRadius: 8,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -97,12 +101,12 @@ class BestSellerSection extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
                 child: Image.network(
-                  book.image,
+                  book.image ?? '',
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
-                      color: Colors.grey.shade200,
+                      color: isDark ? Colors.grey.shade800 : Colors.grey.shade200,
                       child: Center(
                         child: Icon(Icons.book, color: Colors.grey, size: 40.sp),
                       ),
@@ -117,12 +121,13 @@ class BestSellerSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    book.title,
+                    book.title ?? '',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.onSurface,
                     ),
                   ),
                   SizedBox(height: 4.h),
@@ -130,26 +135,28 @@ class BestSellerSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "₹${book.price}",
+                        "${book.price} ${"price".tr().split(' ').last}",
                         style: TextStyle(
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w600,
+                          color: theme.primaryColor,
                         ),
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 12.w,
-                          vertical: 6.h,
+                          horizontal: 10.w,
+                          vertical: 4.h,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: isDark ? theme.primaryColor.withOpacity(0.2) : Colors.black,
                           borderRadius: BorderRadius.circular(6.r),
                         ),
                         child: Text(
-                          "Buy",
+                          "buy".tr(),
                           style: TextStyle(
-                            color: Colors.white,
+                            color: isDark ? theme.primaryColor : Colors.white,
                             fontSize: 11.sp,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -163,4 +170,4 @@ class BestSellerSection extends StatelessWidget {
       ),
     );
   }
-}
+}

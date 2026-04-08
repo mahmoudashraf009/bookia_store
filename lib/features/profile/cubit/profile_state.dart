@@ -33,3 +33,12 @@ class UpdateProfileError extends ProfileState {
   final String message;
   UpdateProfileError(this.message);
 }
+
+class UpdatePasswordLoading extends ProfileState {}
+
+class UpdatePasswordSuccess extends ProfileState {}
+
+class UpdatePasswordError extends ProfileState {
+  final String message;
+  UpdatePasswordError(this.message);
+}

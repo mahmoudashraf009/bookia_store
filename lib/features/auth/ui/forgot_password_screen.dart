@@ -1,7 +1,6 @@
 import 'package:bookia_store/core/theme/app_colors.dart';
 import 'package:bookia_store/core/widgets/app_button.dart';
 import 'package:bookia_store/core/widgets/app_text_field.dart';
-import 'package:bookia_store/gen/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,13 +27,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios_new, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -43,10 +41,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           if (state is SendForgetPasswordLinkLoadingState) {
             showDialog(
               context: context,
+              barrierDismissible: false,
               builder: (context) => Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primaryColor,
-                ),
+                child: CircularProgressIndicator(color: AppColors.primaryColor),
               ),
             );
           } else if (state is SendForgetPasswordLinkErrorState) {
@@ -54,12 +51,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: Text("Error"),
-                content: Text("Failed to send code, please check your email"),
+                title: Text("error".tr()),
+                content: Text("somethingWentWrong".tr()),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text("done".tr()),
+                  )
+                ],
               ),
             );
           } else if (state is SendForgetPasswordLinkSuccessState) {
-            Navigator.pop(context); // pop loading
+            Navigator.pop(context);
             AppNavigator.pushNamed(
               Routes.otp,
               arguments: emailController.text,
@@ -73,30 +76,30 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             children: [
               SizedBox(height: 20.h),
               Text(
-                LocaleKeys.forgotPasswordTitle.tr(),
+                "forgotPasswordTitle".tr(),
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: theme.colorScheme.onSurface,
                 ),
               ),
               SizedBox(height: 10.h),
               Text(
-                LocaleKeys.forgotPasswordSubtitle.tr(),
+                "forgotPasswordSubtitle".tr(),
                 style: TextStyle(fontSize: 13.sp, color: Colors.grey),
               ),
               SizedBox(height: 30.h),
               AppTextField(
                 controller: emailController,
-                hintText: LocaleKeys.enterEmail.tr(),
+                hintText: "enterEmail".tr(),
               ),
               SizedBox(height: 25.h),
               AppButton(
-                text: LocaleKeys.sendCode.tr(),
+                text: "sendCode".tr(),
                 onPressed: () {
                   if (emailController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Please enter your email")),
+                      SnackBar(content: Text("emailRequired".tr())),
                     );
                     return;
                   }
@@ -105,18 +108,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       .sendForgetPasswordLink(email: emailController.text);
                 },
               ),
-              Spacer(),
+              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    LocaleKeys.rememberPassword.tr(),
-                    style: TextStyle(color: Colors.grey),
+                    "rememberPassword".tr(),
+                    style: const TextStyle(color: Colors.grey),
                   ),
                   GestureDetector(
                     onTap: () => AppNavigator.pushReplacementNamed(Routes.login),
                     child: Text(
-                      LocaleKeys.login.tr(),
+                      "login".tr(),
                       style: TextStyle(
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.bold,
@@ -127,9 +130,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
               SizedBox(height: 30.h),
             ],
-          ), // Column
-        ), // Padding
-      ), // BlocListener
-    ); // Scaffold
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -1,4 +1,3 @@
-import '../data/models/book_model.dart';
 
 abstract class HomeState {}
 
@@ -23,4 +22,25 @@ class GetSlidersError extends HomeState {
   final String message;
   GetSlidersError(this.message);
 }
-
+
+// Get New Arrivals
+class GetNewArrivalsLoading extends HomeState {}
+
+class GetNewArrivalsSuccess extends HomeState {}
+
+class GetNewArrivalsError extends HomeState {
+  final String message;
+  GetNewArrivalsError(this.message);
+}
+
+// Search
+class SearchLoading extends HomeState {}
+
+class SearchSuccess extends HomeState {}
+
+class SearchError extends HomeState {
+  final String message;
+  SearchError(this.message);
+}
+
+class SearchCleared extends HomeState {}

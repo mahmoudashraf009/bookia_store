@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/helper/app_constants.dart';
 
 class AuthRepo {
   static Dio dio = Dio();
@@ -57,7 +58,8 @@ class AuthRepo {
 
   static Future<void> saveUserToken(String token) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("token", token);
+    await prefs.setString("token", token);
+    AppConstants.token = token; // Synchronize global variable
   }
 
   static Future<String> logout() async {
@@ -69,7 +71,8 @@ class AuthRepo {
         options: Options(headers: {"Authorization": "Bearer $token"}),
       );
       if (response.statusCode == 200) {
-        prefs.remove("token");
+        await prefs.remove("token");
+        AppConstants.token = null;
         return "success";
       } else {
         throw Exception("Something went wrong");

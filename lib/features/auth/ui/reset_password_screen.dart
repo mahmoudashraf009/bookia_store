@@ -8,8 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/routing/navigator.dart';
 import '../../../core/routing/routes.dart';
-import '../../../generated/locale_keys.g.dart';
-import '../cubit/auth_cubit.dart'; // Ensure this exists
+import '../cubit/auth_cubit.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   final String email;
@@ -41,15 +40,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+            icon: Icon(Icons.arrow_back_ios, color: theme.colorScheme.onSurface),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -58,25 +56,30 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             if (state is ResetPasswordLoadingState) {
               showDialog(
                 context: context,
+                barrierDismissible: false,
                 builder: (context) => Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
+                  child: CircularProgressIndicator(color: AppColors.primaryColor),
                 ),
               );
             } else if (state is ResetPasswordErrorState) {
-              Navigator.pop(context); // close dialog
+              Navigator.pop(context);
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: const Text("Error"),
-                  content: const Text("Failed to reset password, please try again."),
+                  title: Text("error".tr()),
+                  content: Text("somethingWentWrong".tr()),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text("done".tr()),
+                    )
+                  ],
                 ),
               );
             } else if (state is ResetPasswordSuccessState) {
-              Navigator.pop(context); // close dialog
+              Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Password reset successfully!")),
+                SnackBar(content: Text("updateSuccess".tr())),
               );
               AppNavigator.pushNamedAndRemoveUntil(Routes.login);
             }
@@ -88,22 +91,22 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               children: [
                 SizedBox(height: 20.h),
                 Text(
-                  "Create New Password", // You can update this to LocaleKeys.createNewPassword.tr() if present
+                  "resetPasswordTitle".tr(),
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: theme.colorScheme.onSurface,
                   ),
                 ),
                 SizedBox(height: 10.h),
                 Text(
-                  "Please enter your new password",
-                  style: TextStyle(fontSize: 13.sp, color: Colors.grey),
+                  "resetPasswordSubtitle".tr(),
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
                 ),
                 SizedBox(height: 30.h),
                 AppTextField(
                   controller: passwordController,
-                  hintText: "New Password", 
+                  hintText: "password".tr(),
                   obscureText: obscurePassword,
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -118,36 +121,31 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 SizedBox(height: 15.h),
                 AppTextField(
                   controller: confirmPasswordController,
-                  hintText: "Confirm Password", 
+                  hintText: "confirmPassword".tr(),
                   obscureText: obscureConfirmPassword,
                   suffixIcon: IconButton(
                     icon: Icon(
-                      obscureConfirmPassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
+                      obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
                       color: Colors.grey,
                     ),
                     onPressed: () {
-                      setState(
-                          () => obscureConfirmPassword = !obscureConfirmPassword);
+                      setState(() => obscureConfirmPassword = !obscureConfirmPassword);
                     },
                   ),
                 ),
                 SizedBox(height: 25.h),
                 AppButton(
-                  text: "Reset Password",
+                  text: "resetPassword".tr(),
                   onPressed: () {
-                    if (passwordController.text.isEmpty ||
-                        confirmPasswordController.text.isEmpty) {
+                    if (passwordController.text.isEmpty || confirmPasswordController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Please enter password")),
+                        SnackBar(content: Text("passwordRequired".tr())),
                       );
                       return;
                     }
-                    if (passwordController.text !=
-                        confirmPasswordController.text) {
+                    if (passwordController.text != confirmPasswordController.text) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Passwords do not match")),
+                        SnackBar(content: Text("passwordsNotMatch".tr())),
                       );
                       return;
                     }

@@ -1,3 +1,5 @@
+import 'package:bookia_store/core/routing/navigator.dart';
+import 'package:bookia_store/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,23 +8,35 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-             Icon(Icons.menu_book),
-            SizedBox(width: 6.w),
+            Icon(Icons.menu_book, color: theme.primaryColor),
+            SizedBox(width: 8.w),
             Text(
               "Bookia",
               style: TextStyle(
-                fontSize: 18.sp,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
+                color: theme.colorScheme.onSurface,
               ),
             ),
           ],
         ),
-        const Icon(Icons.search)
+        IconButton(
+          onPressed: () {
+            AppNavigator.pushNamed(Routes.search);
+          },
+          icon: Icon(
+            Icons.search,
+            color: theme.colorScheme.onSurface,
+            size: 24.sp,
+          ),
+        ),
       ],
     );
   }
